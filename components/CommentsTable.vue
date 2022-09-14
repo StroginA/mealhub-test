@@ -24,11 +24,18 @@ export default {
     name: 'CommentsTable',
     data() {
         return {
-            comments: []
+            comments: [],
+            page: 0
         }
     },
     async fetch() {
-        this.comments = await fetch('http://localhost:3000/api/comments').then(res => res.json());
+        this.comments = await this.$api.get('/comments', {
+            params: {
+                _limit: 10,
+                _start: this.page*10
+            }
+        })
+        .then(res => res.data);
     }
 }
 </script>
