@@ -19,6 +19,8 @@
             {{comment.email}}
         </p>
         <p class="comment__body">{{comment.body}}</p>
+        <button @click="$router.go(-1)"
+        class="button">Back</button>
     </div>
 </template>
 
