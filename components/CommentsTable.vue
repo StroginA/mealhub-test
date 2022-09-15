@@ -11,14 +11,17 @@
                 </tr>
             </thead>
             <tbody>
-                <NuxtLink :to="'/comments/' + comment.id" 
-                v-for="comment in comments"
-                :key="comment.id"
-                style="display: table-row">
+                <tr v-for="comment in comments" :key="comment.id"
+                @click="handleRowNavigate(comment.id)">
                     <td>{{comment.id}}</td>
-                    <td>{{comment.name}}</td>
+                    <td>
+                        <NuxtLink :to="'/comments/' + comment.id">
+                            {{comment.name}}
+                        </NuxtLink>
+                    </td>
                     <td>{{comment.email}}</td>
-                </NuxtLink>
+                </tr>
+
             </tbody>
         </table>
         <p v-if="comments.length < limit">That's all!</p>
@@ -52,10 +55,17 @@ export default {
     methods: {
         setPage(page) {
             page < 0 ?
-            this.page = 0 :
-            this.page = page;
+                this.page = 0 :
+                this.page = page;
             this.$fetch();
+        },
+        handleRowNavigate(id) {
+            this.$router.push({path: '/comments/' + id});
         }
     }
 }
 </script>
+
+<style scoped>
+
+</style>
