@@ -25,10 +25,13 @@
             </tbody>
         </table>
         <p v-if="comments.length < limit">That's all!</p>
-        <div>
-            <button @click="setPage(0)">Start</button>
-            <button @click="setPage(page-1)">Prev</button>
-            <button @click="setPage(page+1)" v-if="comments.length >= limit">Next</button>
+        <div class="pagination-controls">
+            <button @click="setPage(0)"
+            class="pagination-controls__start pagination-controls__button">Start</button>
+            <button @click="setPage(page-1)"
+            class="pagination-controls__prev pagination-controls__button">Prev</button>
+            <button @click="setPage(page+1)" v-if="comments.length >= limit"
+            class="pagination-controls__next pagination-controls__button">Next</button>
         </div>
     </div>
 </template>
@@ -67,5 +70,25 @@ export default {
 </script>
 
 <style scoped>
-
+    .pagination-controls {
+        margin-top: 1rem;
+        align-self: center;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 1rem;
+        width: 25%;
+        min-width: 640px;
+    }
+    .pagination-controls__button {
+        justify-self: center;
+        border: 0;
+        border-radius: 0.5rem;
+        background-color: rgb(36, 31, 70);
+        box-shadow: 3px 3px 2px black;
+        padding: 0.5rem;
+        width: fit-content;
+        color: lightgray;
+        font-weight: bolder;
+        cursor: pointer;
+    }
 </style>
